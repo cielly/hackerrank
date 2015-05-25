@@ -6,7 +6,6 @@ import java.util.regex.*;
 
 public class Solution {
 
-
     static int max = 0;
 
     static int maxXorRec(int l, int r) {
