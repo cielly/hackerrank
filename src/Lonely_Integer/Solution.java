@@ -7,16 +7,27 @@ import java.math.*;
 import java.util.regex.*;
 
 public class Solution {
+
    static int lonelyinteger(int[] a) {
-          
-      int[] comparator = new int[a.lenght()];
-      int lonely = -1; 
        
-      for(int i=0; i < a.lenght(); i++){
-          
+      Map<Integer, Integer> int_map = new HashMap<Integer, Integer>();
+      Integer previousValue;
+      int lonelyInt = 0;
+               
+      for(int i=0; i < a.length; i++){
+        previousValue = int_map.get(a[i]);
+        int_map.put(a[i], previousValue == null ? 1 : previousValue + 1);
+      }
+
+      Iterator it = int_map.entrySet().iterator();
+     
+      while (it.hasNext()) {
+        Map.Entry pair = (Map.Entry)it.next();
+        if (pair.getValue() == 1) lonelyInt = (int) pair.getKey();
+        it.remove(); // avoids a ConcurrentModificationException
       } 
        
-      return 0;
+      return lonelyInt;
     }
     
    public static void main(String[] args) {
